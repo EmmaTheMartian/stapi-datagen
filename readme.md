@@ -12,9 +12,12 @@ before making a release just to be certain that there are no stale files.
 
 ## Usage
 
+> The buildscript codeblocks are Groovy, however it should be very similar (if not then
+> exactly the same) in Kotlin DSL.
+
 1. Include the datagen library. You can do this via Jitpack.
 
-    ```kotlin
+    ```groovy
     dependencies {
         modImplementation("com.github.emmathemartian:stapi-datagen:version")
     }
@@ -23,7 +26,7 @@ before making a release just to be certain that there are no stale files.
 2. Configure source sets to include a new `generated` source set. Make a directory at
 `src/generated/`, then add this to your buildscript:
 
-    ```kotlin
+    ```groovy
     sourceSets {
         main {
             java {
@@ -39,7 +42,7 @@ before making a release just to be certain that there are no stale files.
 
 3. Create a new run configuration to run the data generator:
 
-    ```kotlin
+    ```groovy
     loom {
         ...
         
@@ -105,3 +108,33 @@ the mod's JAR is made, you can't use any freshly generated files until the next 
 ### Old recipes/models/whatever still exist even after removing the code to generate them
 
 Read [note](#note).
+
+### "Entry ... is a duplicate but no duplicate handling strategy has been set."
+
+Either you have a literal duplicate file across two source sets, or you are experiencing
+[this](https://github.com/gradle/gradle/issues/17236) bug. If you do not have any
+duplicate *files*, but you have duplicate *folders*, it will be the latter.
+
+> Example: `src/main/resouces/assets/` and `src/generated/resources/assets/`. The `assets`
+> folder is flagged as a duplicate for some reason. Thanks Gradle.
+
+To fix the latter, just put this line in `processResources` (or whatever other task is
+failing):
+
+```groovy
+duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+```
+
+If you prefer not to hunt down individual tasks to define `duplicatesStrategy` in, then
+you can add this code to your buildscript, which should configure the duplicates strategy
+for most tasks where it is important:
+
+```groovy
+tasks.withType(Jar).configureEach {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(Copy).configureEach {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+```
