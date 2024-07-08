@@ -31,6 +31,7 @@ loom {
 		register("testData") {
 			source("test")
 			property("datagen.run", "datagen_test")
+			property("datagen.path", project.projectDir.toPath().resolve("src/generated/resources/").toAbsolutePath().toString())
 			client()
 		}
 	}

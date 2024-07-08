@@ -13,6 +13,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     public void run(DataGenContext context) {
         simpleItem(TestMod.itemRuby).save("ruby", this, context);
         simpleItem(TestMod.itemDirtyRuby).save("dirty_ruby", this, context);
+        simpleItem(TestMod.itemSandyRuby).save("sandy_ruby", this, context);
+        simpleItem(TestMod.itemGravellyRuby).save("gravelly_ruby", this, context);
 
         handheldRod()
                 .texture("layer0", TestMod.NAMESPACE.id("item/ruby_rod"))

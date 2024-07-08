@@ -3,7 +3,7 @@ package emmathemartian.datagen.builder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import emmathemartian.datagen.IDataBuilder;
-import emmathemartian.datagen.util.Ingredient;
+import emmathemartian.datagen.util.DataIngredient;
 import emmathemartian.datagen.util.ItemStackHelpers;
 import net.minecraft.item.ItemStack;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -14,7 +14,7 @@ public class ShapedRecipeBuilder implements IDataBuilder {
     public static final Identifier TYPE_ID = Identifier.of("minecraft:crafting_shaped");
 
     protected List<String> pattern = new ArrayList<>();
-    protected Map<Character, Ingredient> key = new HashMap<>();
+    protected Map<Character, DataIngredient> key = new HashMap<>();
     protected ItemStack result;
 
     public ShapedRecipeBuilder pattern(String... patterns) {
@@ -22,7 +22,7 @@ public class ShapedRecipeBuilder implements IDataBuilder {
         return this;
     }
 
-    public ShapedRecipeBuilder define(char key, Ingredient ingredient) {
+    public ShapedRecipeBuilder define(char key, DataIngredient ingredient) {
         this.key.put(key, ingredient);
         return this;
     }

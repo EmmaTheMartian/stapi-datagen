@@ -2,7 +2,7 @@ package emmathemartian.datagen.builder;
 
 import com.google.gson.JsonObject;
 import emmathemartian.datagen.IDataBuilder;
-import emmathemartian.datagen.util.Ingredient;
+import emmathemartian.datagen.util.DataIngredient;
 import emmathemartian.datagen.util.ItemStackHelpers;
 import net.minecraft.item.ItemStack;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -10,10 +10,10 @@ import net.modificationstation.stationapi.api.util.Identifier;
 public class SmeltingRecipeBuilder implements IDataBuilder {
     public static final Identifier TYPE_ID = Identifier.of("minecraft:smelting");
 
-    protected Ingredient ingredient;
+    protected DataIngredient ingredient;
     protected ItemStack result;
 
-    public SmeltingRecipeBuilder ingredient(Ingredient ingredient) {
+    public SmeltingRecipeBuilder ingredient(DataIngredient ingredient) {
         this.ingredient = ingredient;
         return this;
     }

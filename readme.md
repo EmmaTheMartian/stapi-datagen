@@ -15,7 +15,7 @@ before making a release just to be certain that there are no stale files.
 > The buildscript codeblocks are Groovy, however it should be very similar (if not then
 > exactly the same) in Kotlin DSL.
 
-1. Include the datagen library. You can do this via Jitpack.
+1. Include the datagen library. You can do this via Jitpack:
 
     ```groovy
     dependencies {
@@ -49,6 +49,7 @@ before making a release just to be certain that there are no stale files.
         runs {
             register("data") {
                 property("datagen.run", "MODID") // replace with your mod's id
+                property("datagen.path", project.projectDir.toPath().resolve("src/generated/resources/").toAbsolutePath().toString())
                 client()
             }
         }
@@ -59,14 +60,12 @@ before making a release just to be certain that there are no stale files.
 
    ```java
    public class ModData implements DataEntrypoint {
-      public static final String MODID = "example_mod";
-      
       @Entrypoint.Namespace
       private static final Namespace NAMESPACE = Null.get();
       
       @Override
       public void run() {
-         DataGenContext context = new DataGenContext(NAMESPACE, "../src/generated/resources/assets/" + MODID + "/stationapi/");
+         DataGenContext context = new DataGenContext(NAMESPACE);
          
          context.run(new CraftingRecipeProvider(context) {
             @Override
@@ -100,7 +99,7 @@ before making a release just to be certain that there are no stale files.
 
 ## Troubleshooting
 
-### The window does not appear
+### The window does not appear or it closes after loading
 
 This is intentional when running the data generator. Due to when data is made and when
 the mod's JAR is made, you can't use any freshly generated files until the next run.

@@ -9,7 +9,7 @@ import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import net.modificationstation.stationapi.api.tag.TagKey;
 import net.modificationstation.stationapi.api.util.Identifier;
 
-public record Ingredient(Either<Item, TagKey<Item>> item, int count, int damage) {
+public record DataIngredient(Either<Item, TagKey<Item>> item, int count, int damage) {
     public JsonObject toJson() {
         JsonObject object = new JsonObject();
 
@@ -32,27 +32,27 @@ public record Ingredient(Either<Item, TagKey<Item>> item, int count, int damage)
         return object;
     }
 
-    public static Ingredient of(Item item, int count, int damage) {
-        return new Ingredient(Either.left(item), count, damage);
+    public static DataIngredient of(Item item, int count, int damage) {
+        return new DataIngredient(Either.left(item), count, damage);
     }
 
-    public static Ingredient of(Item item, int count) {
+    public static DataIngredient of(Item item, int count) {
         return of(item, count, 0);
     }
 
-    public static Ingredient of(Item item) {
+    public static DataIngredient of(Item item) {
         return of(item, 1, 0);
     }
 
-    public static Ingredient of(ItemStack stack) {
+    public static DataIngredient of(ItemStack stack) {
         return of(stack.getItem(), stack.count, stack.getDamage());
     }
 
-    public static Ingredient of(TagKey<Item> tag, int count) {
-        return new Ingredient(Either.right(tag), count, 0);
+    public static DataIngredient of(TagKey<Item> tag, int count) {
+        return new DataIngredient(Either.right(tag), count, 0);
     }
 
-    public static Ingredient of(TagKey<Item> tag) {
+    public static DataIngredient of(TagKey<Item> tag) {
         return of(tag, 1);
     }
 }

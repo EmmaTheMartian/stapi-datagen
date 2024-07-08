@@ -3,7 +3,7 @@ package emmathemartian.datagen.builder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import emmathemartian.datagen.IDataBuilder;
-import emmathemartian.datagen.util.Ingredient;
+import emmathemartian.datagen.util.DataIngredient;
 import emmathemartian.datagen.util.ItemStackHelpers;
 import net.minecraft.item.ItemStack;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -13,10 +13,10 @@ import java.util.*;
 public class ShapelessRecipeBuilder implements IDataBuilder {
     public static final Identifier TYPE_ID = Identifier.of("minecraft:crafting_shapeless");
 
-    protected List<Ingredient> ingredients = new ArrayList<>();
+    protected List<DataIngredient> ingredients = new ArrayList<>();
     protected ItemStack result;
 
-    public ShapelessRecipeBuilder ingredient(Ingredient ingredient) {
+    public ShapelessRecipeBuilder ingredient(DataIngredient ingredient) {
         this.ingredients.add(ingredient);
         return this;
     }

@@ -11,15 +11,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Function;
 
-public class DataGenContext {
-    public final Namespace namespace;
-    public final Path root;
-
-    public DataGenContext(Namespace namespace, String rootPath) {
-        this.namespace = namespace;
-        this.root = Path.of(rootPath);
-    }
-
+public record DataGenContext(Namespace namespace) {
     public void run(Function<DataGenContext, AbstractDataProvider> provider) {
         run(provider.apply(this));
     }
@@ -40,5 +32,9 @@ public class DataGenContext {
 
     public void save(Path path, JsonObject object) {
         save(path, new Gson().toJson(object));
+    }
+
+    public Path getTargetPath(String parent) {
+        return DataGenMod.targetPath.resolve(parent).resolve(namespace.toString()).resolve("stationapi");
     }
 }
