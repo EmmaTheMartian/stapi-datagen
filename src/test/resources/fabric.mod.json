@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "datagen",
-  "version": "${version}",
+  "id": "datagen_test",
+  "version": "1.0.0",
 
-  "name": "StAPI Datagen",
-  "description": "A data generation library for Station API.",
+  "name": "Datagen Test Mod",
+  "description": "If this mod is enabled outside of a development environment then something is wrong.",
   "authors": [
     "Emma"
   ],
@@ -19,7 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "stationapi:event_bus": [
-      "emmathemartian.datagen.DataGenMod"
+      "emmathemartian.datagen.test.TestMod"
+    ],
+    "data": [
+      "emmathemartian.datagen.test.TestModData"
     ]
   },
   "mixins": [
