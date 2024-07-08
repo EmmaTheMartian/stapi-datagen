@@ -12,12 +12,11 @@ before making a release just to be certain that there are no stale files.
 
 ## Usage
 
-1. Include the datagen library. I recommend just grabbing a JAR from the releases and 
-putting it in a local `lib` directory, then including it in your buildscript:
+1. Include the datagen library. You can do this via Jitpack.
 
     ```kotlin
     dependencies {
-        modImplementation(files("lib/stapi-datagen-{version}.jar"))
+        modImplementation("com.github.emmathemartian:stapi-datagen:version")
     }
     ```
 
